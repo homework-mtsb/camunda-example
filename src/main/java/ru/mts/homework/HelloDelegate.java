@@ -30,6 +30,7 @@ public class HelloDelegate implements JavaDelegate {
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     logger.info("executed HelloDelegate: {}", execution);
+
     execution.setVariable("Global", "12345678");
     execution.setVariableLocal("Value", 0);
     execution.setVariableLocal("Local", 0);

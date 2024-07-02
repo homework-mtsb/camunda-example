@@ -1,9 +1,12 @@
-spring.application.name: camundaExample
+spring.application.name: simpleApplication
 spring:
   datasource:
     url: jdbc:h2:mem:example-simple;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
 camunda:
   bpm:
+    admin-user:
+      id: admin
+      password: admin
     application:
       delete-upon-undeploy: false
       scan-for-process-definitions: false
