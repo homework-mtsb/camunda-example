@@ -16,21 +16,28 @@
  */
 package ru.mts.homework;
 
+import lombok.Data;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
+@Data
 @Component
 public class PrintMessageDelegate implements JavaDelegate {
 
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+  private final KafkaTemplate<String, String> kafkaTemplate;
+
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     Object value = execution.getVariableLocal("message");
     logger.info(value.toString());
+    kafkaTemplate.send("test", value.toString());
   }
 
 }
